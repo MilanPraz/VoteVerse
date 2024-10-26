@@ -6,6 +6,7 @@ import { errorHandler } from './utils/errorHandler.js';
 
 //Routers
 import userRouter from './routes/user.route.js';
+import candidateRouter from './routes/candidate.route.js';
 
 const app = express();
 
@@ -20,7 +21,9 @@ app.use(cookieParser()); // cookie-parser
 
 //Routes & middleware
 app.use('/v1/user', userRouter);
+app.use('/v1/candidate', candidateRouter);
 
+//global error handler triggered by next
 app.use(errorHandler);
 app.get('/', (req, res) => {
     return res.json({

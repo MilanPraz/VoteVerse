@@ -32,3 +32,20 @@ export const registerUser = asynchandler(async (req, res) => {
 
     sendResponse(res, 200, 'User Registered Successfully!', newUser);
 });
+
+export const loginUser = asynchandler(async (req, res) => {
+    const { nationalId, password } = req.body;
+
+    //check if user Exist
+    const userExist = await User.findOne({ nationalId });
+    if (!userExist)
+        throw new ApiError(401, `Invalid credentials: National ID not found.`);
+
+    const loggedUser = await User.findOne({ nationalId });
+
+    const isPasswordMatched = await loggedUser.checkPassword(password);
+    if (!isPasswordMatched)
+        throw new ApiError(401, 'Incorrect password entered.');
+
+    tokenResponse(200, loggedUser, res, 'Login Successful');
+});
