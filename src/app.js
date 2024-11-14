@@ -11,7 +11,15 @@ import candidateRouter from './routes/candidate.route.js';
 const app = express();
 
 //cors
-app.use(cors());
+// CORS configuration
+const corsOptions = {
+    origin: 'http://localhost:5173', // Allow your frontend origin
+    credentials: true, // Allow cookies to be sent
+};
+
+// Apply CORS middleware
+app.use(cors(corsOptions));
+// app.use(cors());
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -26,6 +34,9 @@ app.use('/v1/candidate', candidateRouter);
 //global error handler triggered by next
 app.use(errorHandler);
 app.get('/', (req, res) => {
+    const refresh_token = req.cookies.refreshToken;
+    console.log('Refresh TOKEN Xa??', refresh_token);
+
     return res.json({
         msg: 'It is working',
     });

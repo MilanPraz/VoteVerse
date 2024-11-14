@@ -5,7 +5,7 @@ import Jwt from 'jsonwebtoken';
 import { sendResponse } from './sendResponse';
 
 export const refreshToken = asynchandler(async (req, res) => {
-    const refresh_token = req.cookies.refreshToken;
+    const refresh_token = req.cookies.refreshToken || req.body.refreshToken;
 
     if (!refresh_token)
         throw new ApiError(401, 'No refresh token was provided.');
@@ -23,6 +23,11 @@ export const refreshToken = asynchandler(async (req, res) => {
 
             if (!user)
                 throw new ApiError(401, 'User not found with such National Id');
+
+            //check the refresh TOken with DB refreshToken
+            if (refresh_token !== user?.refreshToken) {
+                throw new ApiError(401, 'Refresh Token is Expired.');
+            }
 
             const newAccessToken = user.generateAccessToken();
             sendResponse(res, 200, 'New Access Token Set Successfully', {

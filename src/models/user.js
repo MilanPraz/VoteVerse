@@ -45,11 +45,19 @@ const userSchema = new mongoose.Schema(
         refreshToken: {
             type: String, // Stores the latest refresh token
         },
+        tempCode: {
+            type: String,
+        },
+        tempCodeExpiry: {
+            type: Date,
+        },
     },
     {
         toJSON: {
             transform(doc, ret) {
                 delete ret.__v;
+                delete ret.password;
+                delete ret.refreshToken;
             },
         },
         timestamps: true,
@@ -66,7 +74,7 @@ userSchema.pre('save', async function (next) {
 });
 
 //generate token /accessToken
-userSchema.methods.generateToken = function () {
+userSchema.methods.generateAccessToken = function () {
     return Jwt.sign(
         {
             _id: this._id,
@@ -75,7 +83,7 @@ userSchema.methods.generateToken = function () {
             nationalId: this.nationalId,
         },
         process.env.ACCESS_TOKEN_SECRET,
-        { expiresIn: process.env.EXPIRES_TOKEN }
+        { expiresIn: process.env.EXPIRES_ACCESS_TOKEN }
     );
 };
 

@@ -14,6 +14,10 @@ const candidateSchema = new mongoose.Schema({
         type: Number,
         required: true,
     },
+    pic: {
+        publicId: String,
+        secureUrl: String,
+    },
 
     votes: [
         {
