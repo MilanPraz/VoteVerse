@@ -1,5 +1,5 @@
 import { ApiError } from './apiError.js';
-import { asynchandler } from './ASynchandler.js';
+import { asynchandler } from './asynchandler.js';
 
 export const roleChecker = asynchandler(async (req, res, next) => {
     if (req.role !== 'admin') {
