@@ -214,7 +214,7 @@ export const changePassword = asynchandler(async (req, res) => {
 
 export const logout = asynchandler(async (req, res) => {
     // Clear the refresh token cookie by setting it to expire immediately
-    console.log('LOGOUT REIGGERDDDD');
+    console.log('LOGOUT TRIGGERDDDD');
 
     res.cookie('refreshToken', '', {
         httpOnly: true,
