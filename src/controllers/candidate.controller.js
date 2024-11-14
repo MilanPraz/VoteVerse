@@ -1,6 +1,6 @@
 import Candidate from '../models/candidate.js';
 import { ApiError } from '../utils/apiError.js';
-import { asynchandler } from '../utils/ASynchandler.js';
+import { asynchandler } from '../utils/asynchandler.js';
 import { sendResponse } from '../utils/sendResponse.js';
 import User from '../models/user.js';
 import CloudinaryUpload from '../multer/upload.js';

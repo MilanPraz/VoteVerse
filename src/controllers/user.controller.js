@@ -1,6 +1,6 @@
 import User from '../models/user.js';
 import { ApiError } from '../utils/apiError.js';
-import { asynchandler } from '../utils/ASynchandler.js';
+import { asynchandler } from '../utils/asynchandler.js';
 import { sendResponse } from '../utils/sendResponse.js';
 import { tokenResponse } from '../utils/tokenResponse.js';
 import Jwt from 'jsonwebtoken';
