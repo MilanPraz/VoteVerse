@@ -12,13 +12,30 @@ const app = express();
 
 //cors
 // CORS configuration
+const allowedOrigins = [
+    'http://localhost:5173',
+    'https://voteverse-kohl.vercel.app',
+];
+
 // const corsOptions = {
 //     origin: 'http://localhost:5173', // Allow your frontend origin
 //     credentials: true, // Allow cookies to be sent
 // };
 
+const corsOptions = {
+    origin: function (origin, callback) {
+        // Check if the origin is in the allowedOrigins array
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true); // Allow the request
+        } else {
+            callback(new Error('Not allowed by CORS')); // Deny the request if origin is not allowed
+        }
+    },
+    credentials: true, // Allow credentials (cookies or authentication tokens) to be sent
+};
+
 // Apply CORS middleware
-app.use(cors());
+app.use(cors(corsOptions));
 // app.use(cors());
 
 app.use(bodyParser.urlencoded({ extended: false }));
