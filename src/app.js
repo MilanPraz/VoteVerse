@@ -12,13 +12,13 @@ const app = express();
 
 //cors
 // CORS configuration
-const corsOptions = {
-    origin: 'http://localhost:5173', // Allow your frontend origin
-    credentials: true, // Allow cookies to be sent
-};
+// const corsOptions = {
+//     origin: 'http://localhost:5173', // Allow your frontend origin
+//     credentials: true, // Allow cookies to be sent
+// };
 
 // Apply CORS middleware
-app.use(cors(corsOptions));
+app.use(cors());
 // app.use(cors());
 
 app.use(bodyParser.urlencoded({ extended: false }));
