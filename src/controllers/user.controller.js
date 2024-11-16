@@ -78,6 +78,7 @@ export const refreshToken = asynchandler(async (req, res) => {
     const refresh_token = req.cookies.refreshToken || req.body.refreshToken;
 
     console.log('helloooooooo');
+    console.log('refresh TOken::', refresh_token);
 
     if (!refresh_token)
         throw new ApiError(401, 'No refresh token was provided.');
