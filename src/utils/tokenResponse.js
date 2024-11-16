@@ -8,7 +8,7 @@ export const tokenResponse = async (statusCode, user, res, message) => {
     res.cookie('refreshToken', refreshToken, {
         httpOnly: true,
         secure: true, //true in production
-        sameSite: 'Strict',
+        sameSite: 'None',
         // sameSite: 'None',
         maxAge: 1 * 24 * 60 * 60 * 1000,
     });
