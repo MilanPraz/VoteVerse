@@ -58,6 +58,7 @@ export const validateAccessToken = asynchandler(async (req, res) => {
     if (!token) {
         throw new ApiError(401, 'No access token provided.');
     }
+    console.log('TOkEEENNN XA RWWWWWWWWWWWWWWWWWWWWW:', token);
 
     Jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
         if (err) {
